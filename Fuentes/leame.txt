@@ -1,0 +1,2 @@
+el xml contiene la configuracino control m en produccion
+el direcotirio ldiab, los componentes de los fuentes unix en produccion, incluyendo el ultimo jar asociado
