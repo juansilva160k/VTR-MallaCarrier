@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Exported at 22-04-2021 12:38:35-->
+<DEFTABLE xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Folder.xsd">
+    <FOLDER DATACENTER="ctmemdesa9" VERSION="900" PLATFORM="UNIX" FOLDER_NAME="LDI_ABP" REAL_FOLDER_ID="694" TYPE="1">
+        <JOB JOBISN="1" APPLICATION="LDI-ALTAS-BAJAS" SUB_APPLICATION="ALTA-BAJAS" MEMNAME="procesoETLA.sh" JOBNAME="LDI_01_GENERA_ALTAS" DESCRIPTION="Genera archivo de altas en directorio correspondiente" CREATED_BY="jsilvamar" RUN_AS="usrout" PRIORITY="AA" CRITICAL="0" TASKTYPE="Command" CYCLIC="0" NODEID="pctlmprd01elp1.vtr.cl" INTERVAL="00001M" MEMLIB="/ftp/interfaces/OUT/ldiab/proceso/shell" CMDLINE="/ftp/interfaces/OUT/ldiab/proceso/shell/procesoGenera_AltasBajas_Carrier.sh A" CONFIRM="0" RETRO="0" MAXWAIT="0" MAXRERUN="0" AUTOARCH="0" MAXDAYS="0" MAXRUNS="0" TIMEFROM="0115" TIMETO="0115" DAYS="ALL" JAN="1" FEB="1" MAR="1" APR="1" MAY="1" JUN="1" JUL="1" AUG="1" SEP="1" OCT="1" NOV="1" DEC="1" DAYS_AND_OR="OR" SHIFT="IGNOREJOB" SHIFTNUM="+00" SYSDB="0" JOBS_IN_GROUP="00000" IND_CYCLIC="START" CREATION_USER="jsilvama" CREATION_DATE="20201222" CREATION_TIME="145329" CHANGE_USERID="jsilvamar" CHANGE_DATE="20210422" CHANGE_TIME="085642" RULE_BASED_CALENDAR_RELATIONSHIP="OR" APPL_TYPE="OS" MULTY_AGENT="N" USE_INSTREAM_JCL="N" VERSION_OPCODE="N" IS_CURRENT_VERSION="Y" VERSION_SERIAL="7" VERSION_HOST="&lt;DOWNLOAD&gt;" CYCLIC_TOLERANCE="0" CYCLIC_TYPE="Interval" PARENT_FOLDER="LDI_ABP">
+            <VARIABLE NAME="%%MAILOPER" VALUE="Operaciones.111@vtr.cl" />
+            <VARIABLE NAME="%%\JOBALTASEXEOK" VALUE="0" />
+            <VARIABLE NAME="%%MAILVTR" VALUE="facturacion.terceros@vtr.cl" />
+            <VARIABLE NAME="%%JOBNAME" VALUE="LDI_01_GENERA_ALTAS" />
+            <OUTCOND NAME="OS_LDIAB_ALTAS-TO-Dummy_Job#2" ODATE="ODAT" SIGN="ADD" />
+            <OUTCOND NAME="LDI_01_GENERA_ALTAS-TO-OS_LDIAB_ALTASP" ODATE="ODAT" SIGN="ADD" />
+            <ON STMT="*" CODE="COMPSTAT EQ 1" AND_OR="AND">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Altas - Error" MESSAGE="0051Se ha producido error 1 en el proceso Genera Altas.0102Alarma  ambientación: No se puede encontrar archivo confVariablesAmbiente_Carrier.cfg. (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 2" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Altas - Error" MESSAGE="0047Se ha producido error 2 en el proceso de Altas.0080Alarma  ambientación: No se puede encontrar archivo ftp_user.cfg (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 3" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Altas - Error" MESSAGE="0047Se ha producido error 3 en el proceso de Altas.0092Alarma  ambientación: No se puede encontrar archivo genera_altas_carrier.cfg (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 4" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Altas - Error" MESSAGE="0047Se ha producido error 4 en el proceso de Altas.0078Alarma  ambientación: No se puede generar log o tmp de proceso (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 5" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Altas - Error" MESSAGE="0047Se ha producido error 5 en el proceso de Altas.0104Alarma  ambientación: No se puede escribir en directorio de procesamiento de datos (dat) (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 6" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Altas - Error" MESSAGE="0047Se ha producido error 6 en el proceso de Altas.0100Alarma  ambientación: No se puede leer en directorio de procesamiento de datos (dat) (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 7" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Altas - Error" MESSAGE="0047Se ha producido error 7 en el proceso de Altas.0102Alarma  ambientación: No se puede borrar en directorio de procesamiento de datos (dat) (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 11" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Altas - Error" MESSAGE="0048Se ha producido error 11 en el proceso de Altas.0092Alarma de negocio: No hay archivos a copiar en la ruta  de entrada a proceso (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 12" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Altas - Error" MESSAGE="0055Se ha producido error 12 en el proceso de Genera Altas.0097Alarma de proceso: Argumento ingresado no corresponde ... debe ser VENTAS o BAJAS (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 13" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Altas - Error" MESSAGE="0055Se ha producido error 13 en el proceso de Genera Altas.0068Alarma de proceso: Formato de fecha desde incorrecto (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 14" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Altas - Error" MESSAGE="0055Se ha producido error 14 en el proceso de Genera Altas.0068Alarma de proceso: Formato de fecha hasta incorrecto (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 15" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Altas - Error" MESSAGE="0055Se ha producido error 15 en el proceso de Genera Altas.0058Error al cargar driver de conexión a la BD (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="OK" AND_OR="OR">
+                <DOMAIL URGENCY="R" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Altas - Fin OK" MESSAGE="0064Ha finalizado con exito el proceso Genera Altas. (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 16" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAIL_OPER" CC_DEST="%%MAILVTR" SUBJECT="Malla Carrier - Proceso Genera Altas - Error" MESSAGE="0103Se ha producido error 16 en proceso de Genera Altas: Error en realizar la conexion a BD (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 17" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER" CC_DEST="%%MAILVTR" SUBJECT="Malla Carrier - Proceso Genera Altas - Error" MESSAGE="0094Se ha producido error 17 en el proceso de Genera Altas. Error interno de la BD (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 18" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Altas - Error" MESSAGE="0100Se ha producido error 18 en el proceso de Genera Altas. Error al escribir en archivo (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 19" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Altas - Error" MESSAGE="0096Se ha producido error 19 en el proceso de Genera Altas. Error al guardar archivo (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+        </JOB>
+        <JOB JOBISN="2" APPLICATION="LDI-ALTAS-BAJAS" SUB_APPLICATION="ALTA-BAJAS" MEMNAME="procesoETLA.sh B" JOBNAME="LDI_01_GENERA_BAJAS" DESCRIPTION="Genera archivo de bajas en directorio" CREATED_BY="jsilvamar" RUN_AS="usrout" PRIORITY="AA" CRITICAL="0" TASKTYPE="Command" CYCLIC="0" NODEID="pctlmprd01elp1.vtr.cl" INTERVAL="00001M" MEMLIB="/ftp/interfaces/OUT/ldiab/proceso/shell" CMDLINE="/ftp/interfaces/OUT/ldiab/proceso/shell/procesoGenera_AltasBajas_Carrier.sh B" CONFIRM="0" RETRO="0" MAXWAIT="0" MAXRERUN="0" AUTOARCH="0" MAXDAYS="0" MAXRUNS="0" TIMEFROM="0030" TIMETO="0030" DAYS="ALL" JAN="1" FEB="1" MAR="1" APR="1" MAY="1" JUN="1" JUL="1" AUG="1" SEP="1" OCT="1" NOV="1" DEC="1" DAYS_AND_OR="OR" SHIFT="IGNOREJOB" SHIFTNUM="+00" SYSDB="0" JOBS_IN_GROUP="00000" IND_CYCLIC="START" CREATION_USER="jsilvama" CREATION_DATE="20201222" CREATION_TIME="151015" CHANGE_USERID="jsilvamar" CHANGE_DATE="20210422" CHANGE_TIME="085642" RULE_BASED_CALENDAR_RELATIONSHIP="OR" APPL_TYPE="OS" MULTY_AGENT="N" USE_INSTREAM_JCL="N" VERSION_OPCODE="N" IS_CURRENT_VERSION="Y" VERSION_SERIAL="7" VERSION_HOST="&lt;DOWNLOAD&gt;" CYCLIC_TOLERANCE="0" CYCLIC_TYPE="Interval" PARENT_FOLDER="LDI_ABP">
+            <VARIABLE NAME="%%MAILOPER" VALUE="Operaciones.111@vtr.cl" />
+            <VARIABLE NAME="%%MAILVTR" VALUE="facturacion.terceros@vtr.cl" />
+            <VARIABLE NAME="%%JOBNAME" VALUE="LDI_01_GENERA_BAJAS" />
+            <OUTCOND NAME="OS_LDIAB_BAJAS-TO-Dummy_Job#2" ODATE="ODAT" SIGN="ADD" />
+            <OUTCOND NAME="OS_LDIAB_BAJASP-TO-OS_LDIAB_BAJASP" ODATE="ODAT" SIGN="ADD" />
+            <OUTCOND NAME="LDI_01_GENERA_BAJAS-TO-OS_LDIAB_BAJASP" ODATE="ODAT" SIGN="ADD" />
+            <ON STMT="*" CODE="OK" AND_OR="AND">
+                <DOMAIL URGENCY="R" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Bajas - Fin OK" MESSAGE="0064Ha finalizado con exito el proceso Genera Bajas. (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 1" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Bajas - Error" MESSAGE="0051Se ha producido error 1 en el proceso Genera Bajas.0101Alarma  ambientación: No se puede encontrar archivo confVariablesAmbienteCarrier.cfg. (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 2" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Bajas - Error" MESSAGE="0047Se ha producido error 2 en el proceso de Bajas.0080Alarma  ambientación: No se puede encontrar archivo ftp_user.cfg (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 3" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Bajas - Error" MESSAGE="0047Se ha producido error 3 en el proceso de Bajas.0092Alarma  ambientación: No se puede encontrar archivo genera_altas_carrier.cfg (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 4" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Bajas - Error" MESSAGE="0047Se ha producido error 4 en el proceso de Bajas.0078Alarma  ambientación: No se puede generar log o tmp de proceso (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 5" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Bajas - Error" MESSAGE="0047Se ha producido error 5 en el proceso de Bajas.0104Alarma  ambientación: No se puede escribir en directorio de procesamiento de datos (dat) (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 6" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Bajas - Error" MESSAGE="0047Se ha producido error 6 en el proceso de Bajas.0100Alarma  ambientación: No se puede leer en directorio de procesamiento de datos (dat) (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 7" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Bajas - Error" MESSAGE="0047Se ha producido error 7 en el proceso de Bajas.0102Alarma  ambientación: No se puede borrar en directorio de procesamiento de datos (dat) (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 11" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Bajas - Error" MESSAGE="0048Se ha producido error 11 en el proceso de Bajas.0092Alarma de negocio: No hay archivos a copiar en la ruta  de entrada a proceso (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 12" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Bajas - Error" MESSAGE="0055Se ha producido error 12 en el proceso de Genera Bajas.0097Alarma de proceso: Argumento ingresado no corresponde ... debe ser VENTAS o BAJAS (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 13" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Bajas - Error" MESSAGE="0055Se ha producido error 13 en el proceso de Genera Bajas.0068Alarma de proceso: Formato de fecha desde incorrecto (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 14" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Bajas - Error" MESSAGE="0055Se ha producido error 14 en el proceso de Genera Bajas.0068Alarma de proceso: Formato de fecha hasta incorrecto (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 15" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Bajas - Error" MESSAGE="0055Se ha producido error 15 en el proceso de Genera Bajas.0058Error al cargar driver de conexión a la BD (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 16" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Genera Bajas - Error" MESSAGE="0103Se ha producido error 16 en proceso de Genera Bajas: Error en realizar la conexion a BD (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 17" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER" CC_DEST="%%MAILVTR" SUBJECT="Malla Carrier - Proceso Genera Bajas - Error" MESSAGE="0094Se ha producido error 17 en el proceso de Genera Bajas. Error interno de la BD (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 18" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER" CC_DEST="%%MAILVTR" SUBJECT="Malla Carrier - Proceso Genera Bajas - Error" MESSAGE="0100Se ha producido error 18 en el proceso de Genera Bajas. Error al escribir en archivo (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 19" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." MESSAGE="0096Se ha producido error 19 en el proceso de Genera Bajas. Error al guardar archivo (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+        </JOB>
+        <JOB JOBISN="3" APPLICATION="LDI-ALTAS-BAJAS" SUB_APPLICATION="ALTA-BAJAS" MEMNAME="procesoETLA.sh" JOBNAME="OS_LDIAB_ALTASP" DESCRIPTION="Mueve archivo de altas al ftp remoto" CREATED_BY="jsilvamar" RUN_AS="usrout" PRIORITY="AA" CRITICAL="0" TASKTYPE="Command" CYCLIC="0" NODEID="pctlmprd01elp1.vtr.cl" INTERVAL="00001M" MEMLIB="/ftp/interfaces/OUT/ldiab/proceso/shell" CMDLINE="/ftp/interfaces/OUT/ldiab/proceso/shell/procesoFtp_AltasBajas_Carrier.sh A" CONFIRM="0" RETRO="0" MAXWAIT="0" MAXRERUN="0" AUTOARCH="0" MAXDAYS="0" MAXRUNS="0" DAYS="ALL" JAN="1" FEB="1" MAR="1" APR="1" MAY="1" JUN="1" JUL="1" AUG="1" SEP="1" OCT="1" NOV="1" DEC="1" DAYS_AND_OR="OR" SHIFT="IGNOREJOB" SHIFTNUM="+00" SYSDB="0" JOBS_IN_GROUP="00000" IND_CYCLIC="START" CREATION_USER="jsilvama" CREATION_DATE="20210215" CREATION_TIME="181932" CHANGE_USERID="jsilvamar" CHANGE_DATE="20210422" CHANGE_TIME="085642" RULE_BASED_CALENDAR_RELATIONSHIP="OR" APPL_TYPE="OS" MULTY_AGENT="N" USE_INSTREAM_JCL="N" VERSION_OPCODE="N" IS_CURRENT_VERSION="Y" VERSION_SERIAL="7" VERSION_HOST="&lt;DOWNLOAD&gt;" CYCLIC_TOLERANCE="0" CYCLIC_TYPE="Interval" PARENT_FOLDER="LDI_ABP">
+            <VARIABLE NAME="%%MAILOPER" VALUE="Operaciones.111@vtr.cl" />
+            <VARIABLE NAME="%%MAILVTR" VALUE="facturacion.terceros@vtr.cl" />
+            <VARIABLE NAME="%%JOBNAME" VALUE="OS_LDIAB_ALTASP" />
+            <INCOND NAME="LDI_01_GENERA_ALTAS-TO-OS_LDIAB_ALTASP" ODATE="ODAT" AND_OR="AND" />
+            <OUTCOND NAME="OS_LDIAB_ALTAS-TO-Dummy_Job#2" ODATE="ODAT" SIGN="ADD" />
+            <OUTCOND NAME="LDI_01_GENERA_ALTAS-TO-OS_LDIAB_ALTASP" ODATE="ODAT" SIGN="DEL" />
+            <ON STMT="*" CODE="COMPSTAT EQ 1" AND_OR="AND">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Altas - Error" MESSAGE="0047Se ha producido error 1 en el proceso de Altas.0078Alarma  ambientación: No se puede encontrar archivo confVariablesAmbiente.cfg.0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 2" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Altas - Error" MESSAGE="0047Se ha producido error 2 en el proceso de Altas.0081Alarma  ambientación: No se puede encontrar archivo ftp_user.cfg. (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 3" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Altas - Error" MESSAGE="0047Se ha producido error 3 en el proceso de Altas.0077Alarma  ambientación: No se puede encontrar archivo altas.cfg (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 4" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Altas - Error" MESSAGE="0047Se ha producido error 4 en el proceso de Altas.0078Alarma  ambientación: No se puede generar log o tmp de proceso (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 5" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Altas - Error" MESSAGE="0047Se ha producido error 5 en el proceso de Altas.0104Alarma  ambientación: No se puede escribir en directorio de procesamiento de datos (dat) (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 6" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Altas - Error" MESSAGE="0047Se ha producido error 6 en el proceso de Altas.0100Alarma  ambientación: No se puede leer en directorio de procesamiento de datos (dat) (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 7" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Altas - Error" MESSAGE="0047Se ha producido error 7 en el proceso de Altas.0102Alarma  ambientación: No se puede borrar en directorio de procesamiento de datos (dat) (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 11" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Altas - Error" MESSAGE="0048Se ha producido error 11 en el proceso de Altas.0092Alarma de negocio: No hay archivos a copiar en la ruta  de entrada a proceso (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 12" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Altas - Error" MESSAGE="0048Se ha producido error 12 en el proceso de Altas.0081Alarma de proceso: fin no exitoso mover archivo a área en proceso (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 13" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Altas - Error" MESSAGE="0048Se ha producido error 13 en el proceso de Altas.0072Alarma de proceso: Ejecución de la copia FTP incompleta. (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 14" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Altas - Error" MESSAGE="0048Se ha producido error 14 en el proceso de Altas.0095Alarma de proceso: error en la validacion del archivo enviado. Problema de FTP. (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 15" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Altas - Error" MESSAGE="0048Se ha producido error 15 en el proceso de Altas.0133Alarma de proceso: error en la validacion del archivo enviado. Archivo enviado y archivo del servidor son diferentes. (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="OK" AND_OR="OR">
+                <DOMAIL URGENCY="R" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Altas - Fin OK" MESSAGE="0061Ha finalizado con exito el proceso FTP Altas. (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+        </JOB>
+        <JOB JOBISN="4" APPLICATION="LDI-ALTAS-BAJAS" SUB_APPLICATION="ALTA-BAJAS" MEMNAME="procesoETLA.sh B" JOBNAME="OS_LDIAB_BAJASP" DESCRIPTION="Mueve archivo de bajas al ftp remoto" CREATED_BY="jsilvamar" RUN_AS="usrout" PRIORITY="AA" CRITICAL="0" TASKTYPE="Command" CYCLIC="0" NODEID="pctlmprd01elp1.vtr.cl" INTERVAL="00001M" MEMLIB="/ftp/interfaces/OUT/ldiab/proceso/shell" CMDLINE="/ftp/interfaces/OUT/ldiab/proceso/shell/procesoFtp_AltasBajas_Carrier.sh B" CONFIRM="0" RETRO="0" MAXWAIT="0" MAXRERUN="0" AUTOARCH="0" MAXDAYS="0" MAXRUNS="0" DAYS="ALL" JAN="1" FEB="1" MAR="1" APR="1" MAY="1" JUN="1" JUL="1" AUG="1" SEP="1" OCT="1" NOV="1" DEC="1" DAYS_AND_OR="OR" SHIFT="IGNOREJOB" SHIFTNUM="+00" SYSDB="0" JOBS_IN_GROUP="00000" IND_CYCLIC="START" CREATION_USER="jsilvama" CREATION_DATE="20210215" CREATION_TIME="181932" CHANGE_USERID="jsilvamar" CHANGE_DATE="20210422" CHANGE_TIME="085642" RULE_BASED_CALENDAR_RELATIONSHIP="OR" APPL_TYPE="OS" MULTY_AGENT="N" USE_INSTREAM_JCL="N" VERSION_OPCODE="N" IS_CURRENT_VERSION="Y" VERSION_SERIAL="7" VERSION_HOST="&lt;DOWNLOAD&gt;" CYCLIC_TOLERANCE="0" CYCLIC_TYPE="Interval" PARENT_FOLDER="LDI_ABP">
+            <VARIABLE NAME="%%MAILOPER" VALUE="Operaciones.111@vtr.cl" />
+            <VARIABLE NAME="%%MAILVTR" VALUE="facturacion.terceros@vtr.cl" />
+            <VARIABLE NAME="%%JOBNAME" VALUE="OS_LDIAB_BAJASP" />
+            <INCOND NAME="LDI_01_GENERA_BAJAS-TO-OS_LDIAB_BAJASP" ODATE="ODAT" AND_OR="AND" />
+            <OUTCOND NAME="OS_LDIAB_BAJAS-TO-Dummy_Job#2" ODATE="ODAT" SIGN="ADD" />
+            <OUTCOND NAME="LDI_01_GENERA_BAJAS-TO-OS_LDIAB_BAJASP" ODATE="ODAT" SIGN="DEL" />
+            <ON STMT="*" CODE="OK" AND_OR="AND">
+                <DOMAIL URGENCY="R" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Bajas - Fin OK" MESSAGE="0062Ha finalizado con exito el proceso FTP Bajas.  (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 1" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Bajas - Error" MESSAGE="0047Se ha producido error 1 en el proceso de Bajas.0094Alarma  ambientación: No se puede encontrar archivo confVariablesAmbiente.cfg. (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 2" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Bajas - Error" MESSAGE="0047Se ha producido error 2 en el proceso de Bajas.0080Alarma  ambientación: No se puede encontrar archivo ftp_user.cfg (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 3" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Bajas - Error" MESSAGE="0047Se ha producido error 3 en el proceso de Bajas.0077Alarma  ambientación: No se puede encontrar archivo bajas.cfg (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 4" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Bajas - Error" MESSAGE="0047Se ha producido error 4 en el proceso de Bajas.0078Alarma  ambientación: No se puede generar log o tmp de proceso (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 5" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Bajas - Error" MESSAGE="0047Se ha producido error 5 en el proceso de Bajas.0104Alarma  ambientación: No se puede escribir en directorio de procesamiento de datos (dat) (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 6" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Bajas - Error" MESSAGE="0047Se ha producido error 6 en el proceso de Bajas.0100Alarma  ambientación: No se puede leer en directorio de procesamiento de datos (dat) (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 7" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Bajas - Error" MESSAGE="0047Se ha producido error 7 en el proceso de Bajas.0102Alarma  ambientación: No se puede borrar en directorio de procesamiento de datos (dat) (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 11" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Bajas - Error" MESSAGE="0048Se ha producido error 11 en el proceso de Bajas.0092Alarma de negocio: No hay archivos a copiar en la ruta  de entrada a proceso (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 12" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Bajas - Error" MESSAGE="0048Se ha producido error 12 en el proceso de Bajas.0081Alarma de proceso: fin no exitoso mover archivo a área en proceso (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 13" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Bajas - Error" MESSAGE="0048Se ha producido error 13 en el proceso de Bajas.0072Alarma de proceso: Ejecución de la copia FTP incompleta. (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 14" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Bajas - Error" MESSAGE="0048Se ha producido error 14 en el proceso de Bajas.0095Alarma de proceso: error en la validacion del archivo enviado. Problema de FTP. (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+            <ON STMT="*" CODE="COMPSTAT EQ 15" AND_OR="OR">
+                <DOMAIL URGENCY="U" DEST="%%MAILOPER." CC_DEST="%%MAILVTR." SUBJECT="Malla Carrier - Proceso Ftp Bajas - Error" MESSAGE="0048Se ha producido error 15 en el proceso de Bajas.0133Alarma de proceso: error en la validacion del archivo enviado. Archivo enviado y archivo del servidor son diferentes. (job %%JOBNAME)0000" ATTACH_SYSOUT="Default" />
+            </ON>
+        </JOB>
+    </FOLDER>
+</DEFTABLE>
