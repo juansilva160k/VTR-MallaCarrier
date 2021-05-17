@@ -1,2 +1,3 @@
 el xml contiene la configuracino control m en produccion
-el direcotirio ldiab, los componentes de los fuentes unix en produccion, incluyendo el ultimo jar asociado
+el direcotirio ldiab, los componentes de los fuentes unix en produccion, incluyendo la ultima versino com´pilada del jar.
+El rar fuentes jar contiene las fuentes del archivo jar
